@@ -45,4 +45,4 @@ getFiles(way).then(async (dirents) => {
 
     console.log(`${name} - ${ext.slice(1)} - ${fileSize / 1024}Kb`);
   }
-});
+}) .catch((err) => console.error(err));
