@@ -12,7 +12,7 @@ const cssFolder = path.resolve(__dirname, "styles");
 const htmlContent = path.resolve(__dirname, "components");
 const htmlTemplate = path.resolve(__dirname, "template.html");
 
-fs.rmSync(projectWay, { recursive: true, force: true });
+// fs.rmSync(projectWay, { recursive: true, force: true });
 fs.mkdir(projectWay, {recursive: true}, (err) => {
   if (err) return console.error(error);
 });
