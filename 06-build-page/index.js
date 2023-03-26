@@ -1,3 +1,5 @@
+// function doStuff() {
+
 const path = require("path");
 const fs = require("fs");
 const fsPromises = fs.promises;
@@ -10,6 +12,7 @@ const cssFolder = path.resolve(__dirname, "styles");
 const htmlContent = path.resolve(__dirname, "components");
 const htmlTemplate = path.resolve(__dirname, "template.html");
 
+fs.rmSync(projectWay, { recursive: true, force: true });
 fs.mkdir(projectWay, {recursive: true}, (err) => {
   if (err) return console.error(error);
 });
@@ -36,7 +39,7 @@ const getAssets = async () => {
           path.resolve(assetsFolder, `${dirent.name}`),
           {withFileTypes: true}
         );
-        fs.mkdir(
+        await fsPromises.mkdir(
           path.resolve(assetsWay, `${dirent.name}`),
           {recursive: true},
           (err) => {
@@ -50,7 +53,7 @@ const getAssets = async () => {
       );
 
       for (item of readyCopy) {
-        fs.unlink(
+        await fsPromises.unlink(
           path.resolve(assetsWay, `${dirent.name}`, `${item.name}`),
           (err) => {
             if (err) return console.error(error);
@@ -58,13 +61,13 @@ const getAssets = async () => {
         );
       }
       for (copy of copies) {
-        fs.copyFile(
+        await fsPromises.copyFile(
           path.resolve(assetsFolder, `${dirent.name}`, `${copy.name}`),
           path.resolve(assetsWay, `${dirent.name}`, `${copy.name}`),
-          (err) => {
-            if (err) return console.error(error);
-          }
-        );
+        //   (err) => {
+        //     if (err) return console.error(error);
+        //   }
+        fs.constants.COPYFILE_EXCL);
       }
     }
   } catch (error) {
@@ -125,3 +128,12 @@ const getStyles = async () => {
   }
 };
 getStyles();
+
+//   };
+  
+//   function run() {
+//     setInterval(doStuff, 3000);
+//   };
+  
+//   run();
+
